@@ -1,0 +1,11 @@
+C:\Users\mathe\Downloads\DDFeAPIClientCSharp\DDFeAPIClientCSharp\bin\Debug\DDFeAPIClientCSharp.exe.config
+C:\Users\mathe\Downloads\DDFeAPIClientCSharp\DDFeAPIClientCSharp\bin\Debug\DDFeAPIClientCSharp.exe
+C:\Users\mathe\Downloads\DDFeAPIClientCSharp\DDFeAPIClientCSharp\bin\Debug\DDFeAPIClientCSharp.pdb
+C:\Users\mathe\Downloads\DDFeAPIClientCSharp\DDFeAPIClientCSharp\bin\Debug\Newtonsoft.Json.dll
+C:\Users\mathe\Downloads\DDFeAPIClientCSharp\DDFeAPIClientCSharp\bin\Debug\Newtonsoft.Json.xml
+C:\Users\mathe\Downloads\DDFeAPIClientCSharp\DDFeAPIClientCSharp\obj\Debug\DDFeAPIClientCSharp.csprojAssemblyReference.cache
+C:\Users\mathe\Downloads\DDFeAPIClientCSharp\DDFeAPIClientCSharp\obj\Debug\DDFeAPIClientCSharp.Properties.Resources.resources
+C:\Users\mathe\Downloads\DDFeAPIClientCSharp\DDFeAPIClientCSharp\obj\Debug\DDFeAPIClientCSharp.csproj.GenerateResource.cache
+C:\Users\mathe\Downloads\DDFeAPIClientCSharp\DDFeAPIClientCSharp\obj\Debug\DDFeAPIClientCSharp.csproj.CopyComplete
+C:\Users\mathe\Downloads\DDFeAPIClientCSharp\DDFeAPIClientCSharp\obj\Debug\DDFeAPIClientCSharp.exe
+C:\Users\mathe\Downloads\DDFeAPIClientCSharp\DDFeAPIClientCSharp\obj\Debug\DDFeAPIClientCSharp.pdb
