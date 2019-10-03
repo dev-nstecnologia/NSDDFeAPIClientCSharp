@@ -15,8 +15,6 @@ Para utilizar as funções de comunicação com a API, você precisa realizar os
 3. Abra o seu projeto e importe a pasta copiada.
 4. A aplicação utiliza o package 'Newtonsoft.Json' para facilitar a deserialização do JSON, respectivamente. 
 
-![dependency](https://confluence.ns.eti.br/download/attachments/25690610/image2019-3-18%208%3A24%3A8.png?version=1&modificationDate=1552908140508&api=v2)
-
 **Pronto!** Agora, você já pode consumir a NS DDF-e API através do seu sistema. Todas as funcionalidades de comunicação foram implementadas na classe DDFeAPI.cs. Caso tenha dúvidas de como adicionar este package, veja o tutorial a seguir: [Package Newtonsoft.Json](https://docs.microsoft.com/pt-br/nuget/consume-packages/install-use-packages-visual-studio#finding-and-installing-a-package).
 
 -----
