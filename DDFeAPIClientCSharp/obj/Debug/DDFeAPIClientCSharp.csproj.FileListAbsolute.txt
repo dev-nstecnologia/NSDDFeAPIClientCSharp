@@ -9,3 +9,14 @@ C:\Users\mathe\Downloads\DDFeAPIClientCSharp\DDFeAPIClientCSharp\obj\Debug\DDFeA
 C:\Users\mathe\Downloads\DDFeAPIClientCSharp\DDFeAPIClientCSharp\obj\Debug\DDFeAPIClientCSharp.csproj.CopyComplete
 C:\Users\mathe\Downloads\DDFeAPIClientCSharp\DDFeAPIClientCSharp\obj\Debug\DDFeAPIClientCSharp.exe
 C:\Users\mathe\Downloads\DDFeAPIClientCSharp\DDFeAPIClientCSharp\obj\Debug\DDFeAPIClientCSharp.pdb
+C:\Users\mathe\Documents\NSTecnologia\Exemplos Linguagens\DDFe\NSDDFeAPIClientCSharp\DDFeAPIClientCSharp\bin\Debug\DDFeAPIClientCSharp.exe.config
+C:\Users\mathe\Documents\NSTecnologia\Exemplos Linguagens\DDFe\NSDDFeAPIClientCSharp\DDFeAPIClientCSharp\bin\Debug\DDFeAPIClientCSharp.exe
+C:\Users\mathe\Documents\NSTecnologia\Exemplos Linguagens\DDFe\NSDDFeAPIClientCSharp\DDFeAPIClientCSharp\bin\Debug\DDFeAPIClientCSharp.pdb
+C:\Users\mathe\Documents\NSTecnologia\Exemplos Linguagens\DDFe\NSDDFeAPIClientCSharp\DDFeAPIClientCSharp\bin\Debug\Newtonsoft.Json.dll
+C:\Users\mathe\Documents\NSTecnologia\Exemplos Linguagens\DDFe\NSDDFeAPIClientCSharp\DDFeAPIClientCSharp\bin\Debug\Newtonsoft.Json.xml
+C:\Users\mathe\Documents\NSTecnologia\Exemplos Linguagens\DDFe\NSDDFeAPIClientCSharp\DDFeAPIClientCSharp\obj\Debug\DDFeAPIClientCSharp.csprojAssemblyReference.cache
+C:\Users\mathe\Documents\NSTecnologia\Exemplos Linguagens\DDFe\NSDDFeAPIClientCSharp\DDFeAPIClientCSharp\obj\Debug\DDFeAPIClientCSharp.Properties.Resources.resources
+C:\Users\mathe\Documents\NSTecnologia\Exemplos Linguagens\DDFe\NSDDFeAPIClientCSharp\DDFeAPIClientCSharp\obj\Debug\DDFeAPIClientCSharp.csproj.GenerateResource.cache
+C:\Users\mathe\Documents\NSTecnologia\Exemplos Linguagens\DDFe\NSDDFeAPIClientCSharp\DDFeAPIClientCSharp\obj\Debug\DDFeAPIClientCSharp.csproj.CopyComplete
+C:\Users\mathe\Documents\NSTecnologia\Exemplos Linguagens\DDFe\NSDDFeAPIClientCSharp\DDFeAPIClientCSharp\obj\Debug\DDFeAPIClientCSharp.exe
+C:\Users\mathe\Documents\NSTecnologia\Exemplos Linguagens\DDFe\NSDDFeAPIClientCSharp\DDFeAPIClientCSharp\obj\Debug\DDFeAPIClientCSharp.pdb

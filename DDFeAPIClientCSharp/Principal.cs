@@ -29,9 +29,7 @@ namespace DDFeAPIClientCSharp
                                         apenasPendManif, incluirPdf, apenasComXml, comEventos);
 
               Para maiores informações, consulte a documentação no link: https://confluence.ns.eti.br/display/PUB/C%23+-+DDF-e+API, e entre em contato com a equipe de integração
-             
-             */
-
+           */
         }
     }
 }

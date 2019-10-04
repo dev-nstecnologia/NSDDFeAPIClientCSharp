@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 namespace DDFeAPIClientCSharp
 {
     public class DDFeAPI
-    {
+    {   
         private static String token = "COLOQUE_TOKEN";
 
         // Esta função envia um conteúdo para uma URL, em requisições do tipo POST
@@ -62,6 +62,7 @@ namespace DDFeAPIClientCSharp
             // Devolve o json de retorno da API
             return retorno;
         }
+
 
 
         // Faz a requisição de manifestação para API
@@ -165,87 +166,15 @@ namespace DDFeAPIClientCSharp
             gravaLinhaLog("[DOWNLOAD_UNICO_RESPOSTA]");
             gravaLinhaLog(resposta);
 
-            tratamentoDownloadUnico(caminho, incluirPdf, resposta);
+            salvaDocs(caminho, incluirPdf, resposta);
 
             return resposta;
         }
 
-        // Esta função realiza o download de documentos de uma MDF-e
-        private static void tratamentoDownloadUnico(String caminho, Boolean incluirPdf, String jsonRetorno)
-        {
-            dynamic respostaJSON = JsonConvert.DeserializeObject(jsonRetorno);
-            String status = respostaJSON.status;
 
-            if (status.Equals("200"))
-            {
-                downloadDocUnico(caminho, incluirPdf, respostaJSON);
-                MessageBox.Show("Donwload Unico feito com sucesso!!!");
-            }
-            else
-            {
-                MessageBox.Show(respostaJSON.motivo);
-            }
-
-        }
-
-        // Esta função realiza o download de documentos de uma MDF-e e salva-os
-        private static void downloadDocUnico(String caminho, Boolean incluirPdf, dynamic respostaJSON)
-        {
-            String xml;
-            String chave;
-            String modelo;
-            String pdf;
-            String tpEvento;
-            Boolean listaDocs = respostaJSON.listaDocs;
-
-            if (!listaDocs)
-            {
-                xml = respostaJSON.xml;
-                chave = respostaJSON.chave;
-                modelo = respostaJSON.modelo;
-                salvarXML(xml, caminho, chave, modelo, "");
-                if (incluirPdf)
-                {
-                    pdf = respostaJSON.pdf;
-                    salvarPDF(pdf, caminho, chave, modelo, "");
-                }
-            }
-            else
-            {
-                dynamic arrayDocs = respostaJSON.xmls;
-                foreach (dynamic itemDoc in arrayDocs)
-                {
-                    xml = itemDoc.xml;
-
-                    if (!String.IsNullOrEmpty(xml))
-                    {
-                        chave = itemDoc.chave;
-                        modelo = itemDoc.modelo;
-                        tpEvento = itemDoc.tpEvento;
-                        if (!String.IsNullOrEmpty(tpEvento))
-                        {
-                            salvarXML(xml, caminho, chave, modelo, tpEvento);
-                        }
-                        else
-                        {
-                            salvarXML(xml, caminho, chave, modelo);
-                        }                     
-
-                        if (incluirPdf)
-                        {
-                            pdf = itemDoc.pdf;
-                            salvarPDF(pdf, caminho, chave, modelo, tpEvento);
-                        }
-                    }
-                }
-            }
-           
-        }
-
-        
         
         //Faz a requisição de download de um lote de documentos
-        public static String downloadLote(String CNPJInteressado, String caminho, String tpAmb, String ultNSU, String modelo,
+        public static String downloadLote(String CNPJInteressado, String caminho, String tpAmb, int ultNSU, String modelo,
                                       Boolean apenasPendManif, Boolean incluirPdf, Boolean apenasComXml, Boolean comEventos)
         {
             DownloadLoteJSON parametros = new DownloadLoteJSON();
@@ -276,69 +205,101 @@ namespace DDFeAPIClientCSharp
             gravaLinhaLog("[DOWNLOAD_LOTE_RESPOSTA]");
             gravaLinhaLog(resposta);
 
-            tratamentoDownloadLote(caminho, incluirPdf, resposta);
+            salvaDocs(caminho, incluirPdf, resposta);
 
             return resposta;
 
         }
-      
-        // Trata o retorno da API apos uma requisição de download em lote de DFes
-        private static void tratamentoDownloadLote(String caminho, Boolean incluirPdf, String jsonRetorno)
+
+
+
+        // Realiza o salvamento de documentos feito nas requisições de download da API
+        private static void salvaDocs(String caminho, Boolean incluirPdf, String jsonRetorno)
         {
-            dynamic respostaJSON = JsonConvert.DeserializeObject(jsonRetorno);
-            String status = respostaJSON.status;
-
-            if (status.Equals("200"))
-            {              
-                MessageBox.Show(downloadDocsLote(caminho, incluirPdf, respostaJSON));
-            }
-            else
-            {
-                MessageBox.Show(respostaJSON.motivo);
-            }
-
-        }
-
-        //Faz o download local dos xmls e/ou pdfs dos documentos requisitados
-        private static String downloadDocsLote(String caminho, Boolean incluirPdf, dynamic respostaJSON)
-        {
+            String resposta;
             String xml;
             String chave;
             String modelo;
             String pdf;
             String tpEvento;
+            Boolean listaDocs;
 
-            dynamic arrayDocs = respostaJSON.xmls;
+            dynamic respostaJSON = JsonConvert.DeserializeObject(jsonRetorno);
+            String status = respostaJSON.status;
 
-            foreach (dynamic itemDoc in arrayDocs)
+
+            if (status.Equals("200"))
             {
-                xml = itemDoc.xml;
-
-                if (!String.IsNullOrEmpty(xml))
+       
+                try
                 {
-                    chave = itemDoc.chave;
-                    modelo = itemDoc.modelo;
-                    tpEvento = itemDoc.tpEvento;
-                    if (!String.IsNullOrEmpty(tpEvento))
-                    {
-                        salvarXML(xml, caminho, chave, modelo, tpEvento);
-                    }
-                    else
-                    {
-                        salvarXML(xml, caminho, chave, modelo);
-                    }
-
+                    listaDocs = respostaJSON.listaDocs;
+                }
+                catch
+                {
+                    listaDocs = true;
+                }
+                
+                if (!listaDocs)
+                {
+                    xml = respostaJSON.xml;
+                    chave = respostaJSON.chave;
+                    modelo = respostaJSON.modelo;
+                    salvarXML(xml, caminho, chave, modelo, "");
                     if (incluirPdf)
                     {
-                        pdf = itemDoc.pdf;
-                        salvarPDF(pdf, caminho, chave, modelo, tpEvento);
+                        pdf = respostaJSON.pdf;
+                        salvarPDF(pdf, caminho, chave, modelo, "");
                     }
                 }
+                else
+                {
+                    dynamic arrayDocs = respostaJSON.xmls;
+                    foreach (dynamic itemDoc in arrayDocs)
+                    {
+                        xml = itemDoc.xml;
+
+                        if (!String.IsNullOrEmpty(xml))
+                        {
+                            chave = itemDoc.chave;
+                            modelo = itemDoc.modelo;
+                            tpEvento = itemDoc.tpEvento;
+                            if (!String.IsNullOrEmpty(tpEvento))
+                            {
+                                salvarXML(xml, caminho, chave, modelo, tpEvento);
+                            }
+                            else
+                            {
+                                salvarXML(xml, caminho, chave, modelo);
+                            }
+
+                            if (incluirPdf)
+                            {
+                                pdf = itemDoc.pdf;
+                                salvarPDF(pdf, caminho, chave, modelo, tpEvento);
+                            }
+                        }
+                    }
+                }
+
+                String ultNSU = respostaJSON.ultNSU;
+                if (String.IsNullOrEmpty(ultNSU))
+                {
+                    resposta = "Donwload Unico feito com sucesso!!!";
+                }
+                else
+                {
+                    resposta = "Ultimo NSU:" + ultNSU;
+                }
+
             }
-            return respostaJSON.ultNSU;
+            else
+            {
+                resposta = respostaJSON.motivo;
+            }
+
+            MessageBox.Show(resposta);
         }
-
-
 
         // Esta função salva um XML
         private static void salvarXML(String xml, String caminho, String chave, String modelo, String tpEvento = "")
@@ -450,7 +411,7 @@ namespace DDFeAPIClientCSharp
         public class DownloadLoteJSON
         {
             public String CNPJInteressado = null;
-            public String ultNSU = null;
+            public int ultNSU;
             public String modelo = null;
             public String tpAmb = null;
             public Boolean apenasPendManif = false;
