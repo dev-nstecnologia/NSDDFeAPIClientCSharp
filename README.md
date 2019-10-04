@@ -120,7 +120,7 @@ comEventos      | Incluir eventos vinculados ao documento disponíveis
 
 Após ter todos os parâmetros listados acima, você deverá fazer a chamada da função. Veja o código de exemplo abaixo:
 
-    String retorno = DDFeAPI.downloadLote("11111111111111", "C:\\Notas\\", "2", "0", "55", false, false, true, true);
+    String retorno = DDFeAPI.downloadLote("11111111111111", "C:\\Notas\\", "2", 0, "55", false, false, true, true);
     MessageBox.Show(retorno);
     
 A função downloadLote fará o envio de um json para API fazendo com que os documentos, a partir do ultimo NSU, sejam baixados e salvos na maquina.
