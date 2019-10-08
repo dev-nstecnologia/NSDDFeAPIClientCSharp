@@ -110,6 +110,8 @@ CNPJInteressado | Conteúdo de emissão do documento.
 caminho         | Local onde serão salvos os documentos
 tpAmb           | Tipo de ambiente evento posto na manifestação:<ul><li>1 - Produção</li><li>2 - Homologação</li></ul>
 ultNSU          | Ultimo Número Sequencial Único para fazer download a partir do mesmo
+dhInicial       | Data inicial da faixa de tempo na qual os documentos foram emitidos
+dhFinal         | Data final da faixa de tempo na qual os documentos foram emitidos
 modelo          | Modelo do documento:<ul> <li>55 - NF-e</li> <li>98 - NFSe SP</li> <li>57 - CT-e</li> </ul>
 apenasPendManif | Carregar apenas documentos pendentes de manifestação
 incluirPdf      | Incluir do documento auxiliar
@@ -119,8 +121,13 @@ comEventos      | Incluir eventos vinculados ao documento disponíveis
 #### Exemplo de chamada:
 
 Após ter todos os parâmetros listados acima, você deverá fazer a chamada da função. Veja o código de exemplo abaixo:
-
-    String retorno = DDFeAPI.downloadLote("11111111111111", "C:\\Notas\\", "2", 0, "55", false, false, true, true);
+   
+    //Por ultNSU
+    String retorno = DDFeAPI.downloadLote("11111111111111", "C:\\Notas\\", "2", "0", "", "", "55", false, false, true, true);
+    MessageBox.Show(retorno);
+    
+    //Por dhInicial e dhFinal
+    String retorno = DDFeAPI.downloadLote("11111111111111", "C:\\Notas\\", "2", "", "08/09/2019 17:19:00-03:00", "09/09/2019 17:19:00-03:00" "55", false, false, true, true);
     MessageBox.Show(retorno);
     
 A função downloadLote fará o envio de um json para API fazendo com que os documentos, a partir do ultimo NSU, sejam baixados e salvos na maquina.
