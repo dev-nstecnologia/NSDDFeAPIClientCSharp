@@ -8,12 +8,12 @@ namespace DDFeAPIClientCSharp
 {
     public class DDFeAPI
     {   
-        private static String token = "COLOQUE_TOKEN";
+        private static string token = "COLOQUE_TOKEN";
 
         // Esta função envia um conteúdo para uma URL, em requisições do tipo POST
-        private static String enviaConteudoParaAPI(String conteudo, String url)
+        private static string enviaConteudoParaAPI(string conteudo, string url)
         {
-            String retorno = "";
+            string retorno = "";
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
             httpWebRequest.Method = "POST";
             httpWebRequest.Headers["X-AUTH-TOKEN"] = token;
@@ -66,13 +66,13 @@ namespace DDFeAPIClientCSharp
 
 
         // Faz a requisição de manifestação para API
-        public static String manifestacao(String CNPJInteressado, String tpEvento, String nsu, String xJust = "", String chave = "")
+        public static string manifestacao(string CNPJInteressado, string tpEvento, string nsu, string xJust = "", string chave = "")
         {
 
             ManifestacaoJSON parametros = new ManifestacaoJSON();
             parametros.CNPJInteressado = CNPJInteressado;
 
-            if (String.IsNullOrEmpty(nsu))
+            if (string.IsNullOrEmpty(nsu))
             {
                 parametros.chave = chave;
             } 
@@ -89,14 +89,14 @@ namespace DDFeAPIClientCSharp
             }
 
 
-            String json = JsonConvert.SerializeObject(parametros, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            string json = JsonConvert.SerializeObject(parametros, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
 
-            String url = "https://ddfe.ns.eti.br/events/manif";
+            string url = "https://ddfe.ns.eti.br/events/manif";
 
             gravaLinhaLog("[MANIFESTACAO_DADOS]");
             gravaLinhaLog(json);
 
-            String resposta = enviaConteudoParaAPI(json, url);
+            string resposta = enviaConteudoParaAPI(json, url);
 
             gravaLinhaLog("[MANIFESTACAO_RESPOSTA]");
             gravaLinhaLog(json);
@@ -107,12 +107,12 @@ namespace DDFeAPIClientCSharp
         }
 
         // Trata o retorno da manifestação da API
-        private static void tratamentoManifestacao(String jsonRetorno)
+        private static void tratamentoManifestacao(string jsonRetorno)
         {
-            String xMotivo;
+            string xMotivo;
 
             dynamic respostaJSON = JsonConvert.DeserializeObject(jsonRetorno);
-            String status = respostaJSON.status;
+            string status = respostaJSON.status;
 
             if (status.Equals("200"))
             {
@@ -133,8 +133,8 @@ namespace DDFeAPIClientCSharp
 
 
         // Faz a requisição de download de um unico documento 
-        public static String downloadUnico(String CNPJInteressado, String caminho, String tpAmb, String nsu, String modelo,
-                                       String chave, Boolean incluirPdf, Boolean apenasComXml, Boolean comEventos)
+        public static string downloadUnico(string CNPJInteressado, string caminho, string tpAmb, string nsu, string modelo,
+                                       string chave, Boolean incluirPdf, Boolean apenasComXml, Boolean comEventos)
         {
             // Preenche o objeto da classe e transforma em JSON
             DownloadUnicoJSON parametros = new DownloadUnicoJSON();
@@ -142,7 +142,7 @@ namespace DDFeAPIClientCSharp
             parametros.tpAmb = tpAmb;
             parametros.incluirPDF = incluirPdf;
 
-            if (String.IsNullOrEmpty(nsu))
+            if (string.IsNullOrEmpty(nsu))
             {
                 parametros.chave = chave;
                 parametros.apenasComXml = apenasComXml;
@@ -154,14 +154,14 @@ namespace DDFeAPIClientCSharp
                 parametros.modelo = modelo;
             }
 
-            String json = JsonConvert.SerializeObject(parametros, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            string json = JsonConvert.SerializeObject(parametros, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
 
-            String url = "https://ddfe.ns.eti.br/dfe/unique";
+            string url = "https://ddfe.ns.eti.br/dfe/unique";
 
             gravaLinhaLog("[DOWNLOAD_UNICO_DADOS]");
             gravaLinhaLog(json);
 
-            String resposta = enviaConteudoParaAPI(json, url);
+            string resposta = enviaConteudoParaAPI(json, url);
 
             gravaLinhaLog("[DOWNLOAD_UNICO_RESPOSTA]");
             gravaLinhaLog(resposta);
@@ -174,15 +174,25 @@ namespace DDFeAPIClientCSharp
 
         
         //Faz a requisição de download de um lote de documentos
-        public static String downloadLote(String CNPJInteressado, String caminho, String tpAmb, int ultNSU, String modelo,
-                                      Boolean apenasPendManif, Boolean incluirPdf, Boolean apenasComXml, Boolean comEventos)
+        public static string downloadLote(string CNPJInteressado, string caminho, string tpAmb, string ultNSU, string dhInicial,
+                                      string dhFinal,string modelo,Boolean apenasPendManif, Boolean incluirPdf, Boolean apenasComXml, Boolean comEventos)
         {
             DownloadLoteJSON parametros = new DownloadLoteJSON();
             parametros.CNPJInteressado = CNPJInteressado;
-            parametros.ultNSU = ultNSU;
+            
             parametros.modelo = modelo;
             parametros.tpAmb = tpAmb;
             parametros.incluirPDF = incluirPdf;
+
+            if (string.IsNullOrEmpty(ultNSU))
+            {
+                parametros.dhInicial = dhInicial;
+                parametros.dhFinal = dhFinal;
+            }
+            else
+            {
+                parametros.ultNSU = Int32.Parse(ultNSU);
+            }
 
             if (!apenasPendManif)
             {
@@ -193,14 +203,14 @@ namespace DDFeAPIClientCSharp
             {
                 parametros.apenasPendManif = true;
             }
-            String json = JsonConvert.SerializeObject(parametros, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            string json = JsonConvert.SerializeObject(parametros, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             
-            String url = "https://ddfe.ns.eti.br/dfe/bunch";
+            string url = "https://ddfe.ns.eti.br/dfe/bunch";
 
             gravaLinhaLog("[DOWNLOAD_LOTE_DADOS]");
             gravaLinhaLog(json);
 
-            String resposta = enviaConteudoParaAPI(json, url);
+            string resposta = enviaConteudoParaAPI(json, url);
 
             gravaLinhaLog("[DOWNLOAD_LOTE_RESPOSTA]");
             gravaLinhaLog(resposta);
@@ -214,18 +224,18 @@ namespace DDFeAPIClientCSharp
 
 
         // Realiza o salvamento de documentos feito nas requisições de download da API
-        private static void salvaDocs(String caminho, Boolean incluirPdf, String jsonRetorno)
+        private static void salvaDocs(string caminho, Boolean incluirPdf, string jsonRetorno)
         {
-            String resposta;
-            String xml;
-            String chave;
-            String modelo;
-            String pdf;
-            String tpEvento;
+            string resposta;
+            string xml;
+            string chave;
+            string modelo;
+            string pdf;
+            string tpEvento;
             Boolean listaDocs;
 
             dynamic respostaJSON = JsonConvert.DeserializeObject(jsonRetorno);
-            String status = respostaJSON.status;
+            string status = respostaJSON.status;
 
 
             if (status.Equals("200"))
@@ -259,12 +269,12 @@ namespace DDFeAPIClientCSharp
                     {
                         xml = itemDoc.xml;
 
-                        if (!String.IsNullOrEmpty(xml))
+                        if (!string.IsNullOrEmpty(xml))
                         {
                             chave = itemDoc.chave;
                             modelo = itemDoc.modelo;
                             tpEvento = itemDoc.tpEvento;
-                            if (!String.IsNullOrEmpty(tpEvento))
+                            if (!string.IsNullOrEmpty(tpEvento))
                             {
                                 salvarXML(xml, caminho, chave, modelo, tpEvento);
                             }
@@ -282,8 +292,8 @@ namespace DDFeAPIClientCSharp
                     }
                 }
 
-                String ultNSU = respostaJSON.ultNSU;
-                if (String.IsNullOrEmpty(ultNSU))
+                string ultNSU = respostaJSON.ultNSU;
+                if (string.IsNullOrEmpty(ultNSU))
                 {
                     resposta = "Donwload Unico feito com sucesso!!!";
                 }
@@ -302,9 +312,9 @@ namespace DDFeAPIClientCSharp
         }
 
         // Esta função salva um XML
-        private static void salvarXML(String xml, String caminho, String chave, String modelo, String tpEvento = "")
+        private static void salvarXML(string xml, string caminho, string chave, string modelo, string tpEvento = "")
         {
-            String extensao;
+            string extensao;
             if (modelo.Equals("55"))
             {
                 extensao = "-procNFe.xml";
@@ -318,19 +328,19 @@ namespace DDFeAPIClientCSharp
                 extensao = "-procNFSeSP.xml";
             }
 
-            String path = caminho + "\\xmls\\";
+            string path = caminho + "\\xmls\\";
             if (!Directory.Exists(path)) Directory.CreateDirectory(path);
 
-            String localParaSalvar = path + tpEvento + chave + extensao;
+            string localParaSalvar = path + tpEvento + chave + extensao;
 
-            String ConteudoSalvar = xml.Replace(@"\", @"");
+            string ConteudoSalvar = xml.Replace(@"\", @"");
             File.WriteAllText(localParaSalvar, ConteudoSalvar);
         }
 
         // Esta função salva um PDF
-        private static void salvarPDF(String pdf, String caminho, String chave, String modelo, String tpEvento = "")
+        private static void salvarPDF(string pdf, string caminho, string chave, string modelo, string tpEvento = "")
         {
-            String extensao;
+            string extensao;
             if (modelo.Equals("55"))
             {
                 extensao = "-procNFe.pdf";
@@ -343,10 +353,10 @@ namespace DDFeAPIClientCSharp
             {
                 extensao = "-procNFSeSP.pdf";
             }
-            String path = caminho + "\\pdfs\\";
+            string path = caminho + "\\pdfs\\";
             if (!Directory.Exists(path)) Directory.CreateDirectory(path);
 
-            String localParaSalvar = path + tpEvento + chave + extensao;
+            string localParaSalvar = path + tpEvento + chave + extensao;
 
             byte[] bytes = Convert.FromBase64String(pdf);
             if (File.Exists(localParaSalvar)) File.Delete(localParaSalvar);
@@ -357,18 +367,18 @@ namespace DDFeAPIClientCSharp
         }
 
         // Esta função grava uma linha de texto em um arquivo de log
-        private static void gravaLinhaLog(String conteudo)
+        private static void gravaLinhaLog(string conteudo)
         {
-            String caminho = Application.StartupPath + "\\log\\";
+            string caminho = Application.StartupPath + "\\log\\";
 
             Console.Write(caminho);
             if (!Directory.Exists(caminho))
             {
                 Directory.CreateDirectory(caminho);
             }
-            String data = DateTime.Now.ToShortDateString();
-            String hora = DateTime.Now.ToShortTimeString();
-            String nomeArq = data.Replace("/", "");
+            string data = DateTime.Now.ToShortDateString();
+            string hora = DateTime.Now.ToShortTimeString();
+            string nomeArq = data.Replace("/", "");
 
             using (StreamWriter outputFile = new StreamWriter(caminho + nomeArq + ".txt", true))
             {
@@ -382,25 +392,25 @@ namespace DDFeAPIClientCSharp
         //Manifestação
         public class ManifestacaoJSON
         {
-            public String CNPJInteressado = null;
-            public String nsu = null;
-            public String chave = null;
+            public string CNPJInteressado = null;
+            public string nsu = null;
+            public string chave = null;
             public Manifestacao manifestacao;
         }
         public class Manifestacao
         {
-            public String tpEvento = null;
-            public String xJust = null;
+            public string tpEvento = null;
+            public string xJust = null;
         }
 
         //Download Unico
         public class DownloadUnicoJSON
         {
-            public String CNPJInteressado = null;
-            public String nsu = null;
-            public String chave = null;
-            public String modelo = null;
-            public String tpAmb = null;
+            public string CNPJInteressado = null;
+            public string nsu = null;
+            public string chave = null;
+            public string modelo = null;
+            public string tpAmb = null;
             public Boolean apenasComXml = false;
             public Boolean incluirPDF = false;
             public Boolean comEventos = false;
@@ -410,10 +420,12 @@ namespace DDFeAPIClientCSharp
         //Download Lote
         public class DownloadLoteJSON
         {
-            public String CNPJInteressado = null;
+            public string CNPJInteressado = null;
             public int ultNSU;
-            public String modelo = null;
-            public String tpAmb = null;
+            public string dhInicial = null;
+            public string dhFinal = null;
+            public string modelo = null;
+            public string tpAmb = null;
             public Boolean apenasPendManif = false;
             public Boolean apenasComXml = false;
             public Boolean incluirPDF = false;
