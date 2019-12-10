@@ -25,9 +25,7 @@ Para realizar uma manifestação de um documento emitido contra o CNPJ do seu cl
 
 #### Parâmetros:
 
-ATENÇÃO: o token também é um parâmetro necessário, e você deve primeiramente defini-lo na classe DDFeAPI.cs. Verifique os parâmetros da classe.
-
-![dependency](https://confluence.ns.eti.br/download/attachments/28412620/image2019-10-3%2014%3A27%3A34.png?version=1&modificationDate=1570123656027&api=v2)
+ATENÇÃO: o **token** também é um parâmetro necessário, e você deve primeiramente defini-lo na classe DDFeAPI.cs. Verifique os parâmetros da classe.
 
 Parametros     | Descrição
 :-------------:|:-----------
@@ -61,9 +59,7 @@ Para realizar um download de um unico documento, você poderá utilizar a funç�
 
 #### Parâmetros:
 
-ATENÇÃO: o token também é um parâmetro necessário, e você deve primeiramente defini-lo na classe DDFeAPI.cs. Verifique os parâmetros da classe.
-
-![dependency](https://confluence.ns.eti.br/download/attachments/28412620/image2019-10-3%2014%3A27%3A34.png?version=1&modificationDate=1570123656027&api=v2)
+ATENÇÃO: o **token** também é um parâmetro necessário, e você deve primeiramente defini-lo na classe DDFeAPI.cs. Verifique os parâmetros da classe.
 
 Parametros      | Descrição
 :-------------: |:-----------
@@ -100,9 +96,7 @@ Para realizar um download de lote de documentos, você poderá utilizar a funç�
 
 #### Parâmetros:
 
-ATENÇÃO: o token também é um parâmetro necessário, e você deve primeiramente defini-lo na classe DDFeAPI.cs. Verifique os parâmetros da classe.
-
-![dependency](https://confluence.ns.eti.br/download/attachments/28412620/image2019-10-3%2014%3A27%3A34.png?version=1&modificationDate=1570123656027&api=v2)
+ATENÇÃO: o **token** também é um parâmetro necessário, e você deve primeiramente defini-lo na classe DDFeAPI.cs. Verifique os parâmetros da classe.
 
 Parametros      | Descrição
 :-------------: |:-----------
